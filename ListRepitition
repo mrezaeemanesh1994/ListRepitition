@@ -1,0 +1,23 @@
+# Example list of station names
+set stations {StationA StationB StationA StationC StationB StationA}
+
+# Create an empty dictionary to store counts
+set countDict {}
+
+# Loop through the list and count repetitions
+foreach station $stations {
+    # Check if the station is already in the dictionary
+    if {[dict exists $countDict $station]} {
+        # Increment the count for the station
+        set currentCount [dict get $countDict $station]
+        dict set countDict $station [expr {$currentCount + 1}]
+    } else {
+        # If not, add the station to the dictionary with a count of 1
+        dict set countDict $station 1
+    }
+}
+
+# Print the repetition count for each station
+foreach {station count} [dict get $countDict] {
+    puts "$station appears $count times"
+}
